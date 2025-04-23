@@ -1,0 +1,132 @@
+﻿@model IEnumerable<not_defteri.Models.Not>
+
+
+
+<head>
+    
+    <style>
+        /* Global styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+        }
+
+        /* Title */
+        .page-title {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 2em;
+            color: #333;
+        }
+
+        /* Create button */
+        .create-note {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+
+        .create-btn {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+            .create-btn:hover {
+                background-color: #45a049;
+            }
+
+        /* Table styles */
+        .custom-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+            .custom-table th, .custom-table td {
+                padding: 12px 15px;
+                text-align: left;
+                border: 1px solid #ddd;
+            }
+
+            .custom-table th {
+                background-color: #f4f4f4;
+                font-weight: bold;
+            }
+
+            .custom-table tr:nth-child(even) {
+                background-color: #f9f9f9;
+            }
+
+            .custom-table tr:hover {
+                background-color: #f1f1f1;
+            }
+
+        /* Action buttons */
+        .action-btn {
+            padding: 5px 10px;
+            text-decoration: none;
+            border-radius: 3px;
+            font-size: 14px;
+        }
+
+        .edit-btn {
+            background-color: #ffc107;
+            color: white;
+        }
+
+        .details-btn {
+            background-color: #17a2b8;
+            color: white;
+        }
+
+        .delete-btn {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .action-btn:hover {
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+
+    <h1 class="page-title">Notlar</h1>
+
+    <p class="create-note">
+        <a class="create-btn" asp-action="Olustur">Yeni Not Oluştur</a>
+    </p>
+
+    <table class="custom-table">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Name)</th>
+                <th>@Html.DisplayNameFor(model => model.Content)</th>
+                <th>@Html.DisplayNameFor(model => model.CreatedAt)</th>
+                <th>İşlemler</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Content)</td>
+                    <td>@Html.DisplayFor(modelItem => item.CreatedAt)</td>
+                    <td>
+                        <a class="action-btn edit-btn" asp-action="Duzenle" asp-route-id="@item.Id">Düzenle</a>
+                        <a class="action-btn details-btn" asp-action="Detaylar" asp-route-id="@item.Id">Detaylar</a>
+                        <a class="action-btn delete-btn" asp-action="Sil" asp-route-id="@item.Id">Sil</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</body>
+
